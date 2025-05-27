@@ -41,11 +41,10 @@ jobs:
   # This workflow contains a single job called "greet"
   greet:
     # Display name for the job
-    name: "Greetings, Program!"
+    name: "Code Generation"
 
     # The type of runner that the job will run on, in this case a Linus hosted runner
-    runs-on:
-      - ubuntu-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -55,7 +54,7 @@ jobs:
           echo "Running script" 
           echo "python FblCodeGen.py ${{ github.event.inputs.MCU }} -f ${{ github.event.inputs.FLOW }} ${{ github.event.inputs.INSTANCE }}"
           echo "Actual Script run "
-
+ 
       - name: Checkout BHV2 repository
         uses: actions/checkout@v4
         with:
@@ -67,9 +66,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: SCRIPT2
       - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.x'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
       - name: Run the Python script from SCRIPT2
         run: |
           cd SCRIPT2
