@@ -44,11 +44,11 @@ jobs:
         with:
           path: BHV2
       - name: Checkout SCRIPT2 repository
-          uses: actions/checkout@v4
-          with:
-            repository: akirankaur/SCRIPT2   # <- CHANGE THIS to actual repo
-            token: ${{ secrets.GITHUB_TOKEN }}
-            path: SCRIPT2
+        uses: actions/checkout@v4
+        with:
+          repository: akirankaur/SCRIPT2   # <- CHANGE THIS to actual repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: SCRIPT2
       - name: Set up Python
       uses: actions/setup-python@v5
       with:
