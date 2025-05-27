@@ -73,3 +73,17 @@ jobs:
         run: |
           cd SCRIPT2
           python main.py
+      - name: Commit changes to BHV2 repo
+        run: |
+          cd BHV2
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Add and commit if there are changes
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Auto commit from GitHub Actions workflow"
+            git push origin HEAD
+          fi
