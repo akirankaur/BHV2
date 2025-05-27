@@ -1,0 +1,59 @@
+# This is a basic workflow that is manually triggered
+
+# Display name of workflow
+name: BHV Workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: "Scritp Run and do production"
+        # Default value if no value is explicitly provided
+        default: "MCU3"
+        # Input has to be provided for the workflow to run
+        required: true
+        # Input Type (string, choice, boolean)
+        type: string
+       
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  greet:
+    # Display name for the job
+    name: "Greetings, Program!"
+
+    # The type of runner that the job will run on, in this case a Linus hosted runner
+    runs-on:
+      - ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Runs command(s) using the runners shell and gets context from the github object
+      - name: Send greeting
+        run: |
+          echo "Hello ${{ github.event.inputs.name }}" 
+          echo "Your favorite city is ${{ github.event.inputs.city }}"
+          echo "Is your favorite color blue: ${{ github.event.inputs.fav-color-blue }}"
+    steps:
+      - name: Checkout BHV2 repository
+        uses: actions/checkout@v4
+        with:
+          path: BHV2
+      - name: Checkout SCRIPT2 repository
+          uses: actions/checkout@v4
+          with:
+            repository: akirankaur/SCRIPT2   # <- CHANGE THIS to actual repo
+            token: ${{ secrets.GITHUB_TOKEN }}
+            path: SCRIPT2
+      - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+      - name: Run the Python script from SCRIPT2
+        run: |
+          cd SCRIPT2
+          python main.py
