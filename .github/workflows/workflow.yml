@@ -75,7 +75,7 @@ jobs:
           python main.py
       - name: Commit changes to BHV2 repo
         env:
-          GH_TOKEN: ${{ secrets.PAT }}
+          GH_TOKEN: ${{ secrets.API_TOKEN }}
         run: |
           cd BHV2
           git config user.name "github-actions[bot]"
